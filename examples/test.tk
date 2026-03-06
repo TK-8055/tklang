@@ -1,4 +1,7 @@
-x = 10
-y = 20
-print(x + y)
-print("TK Lang")
+x = 20
+y = 5
+
+print(x - y)
+print(x * y)
+print(x / y)
+print((x + y) * 2)
