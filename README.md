@@ -1,14 +1,30 @@
 ﻿# TK Lang
 
-**TK Lang** is a minimal Domain-Specific Language (DSL) for simple machine learning and data analysis workflows.
-It reduces Python boilerplate and lets you run tasks with clean, readable commands.
+<p align="center">
+  <strong>A tiny language for big ML ideas.</strong><br/>
+  Write less boilerplate. Run more experiments.
+</p>
 
-## Why TK Lang?
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white" alt="Python 3.11+" />
+  <img src="https://img.shields.io/badge/Status-Experimental-orange" alt="Experimental" />
+  <img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License" />
+  <img src="https://img.shields.io/badge/Built%20with-SLY-blue" alt="Built with SLY" />
+</p>
 
-Machine learning workflows often require many lines of Python for basic operations.
-TK Lang is designed to provide a high-level interface that feels simple while still running on top of Python tooling.
+## What Is TK Lang?
 
-## Example
+**TK Lang** is a minimal Domain-Specific Language (DSL) built to simplify machine learning workflows and data analysis.
+It removes repetitive Python setup code and gives you a clean, human-readable syntax.
+
+## Why It Stands Out
+
+- Fast to read, fast to write
+- Simple syntax for beginners and rapid prototyping
+- Interpreter architecture that is easy to extend
+- Designed for future ML-first commands
+
+## Quick Example
 
 ```tk
 x = 10
@@ -24,9 +40,9 @@ Output:
 TK Lang
 ```
 
-## Future Direction
+## Vision: ML in Plain Language
 
-Target syntax for ML tasks:
+Future syntax target:
 
 ```tk
 data = load("sales.csv")
@@ -35,90 +51,40 @@ forecast(model, 30)
 plot(model)
 ```
 
-The language will internally use the Python ML ecosystem, while exposing a compact DSL syntax.
+TK Lang will use Python's ML ecosystem under the hood while keeping a compact DSL interface.
 
 ## Current Features
 
-- Variables
-- Numbers
-- Strings
-- Arithmetic addition (`+`)
-- Print statements
-- Basic interpreter pipeline
-
-Example:
-
-```tk
-x = 10
-y = 20
-print(x + y)
-print("Hello TK")
-```
+| Feature | Status |
+|---|---|
+| Variables | Done |
+| Numbers | Done |
+| Strings | Done |
+| Addition (`+`) | Done |
+| Print statements | Done |
+| Lexer -> Parser -> AST -> Interpreter pipeline | Done |
 
 ## Architecture
 
-TK Lang follows a standard interpreter flow:
+```text
+.tk source file
+    -> Lexer (tokenizes input)
+    -> Parser (builds AST)
+    -> Interpreter (executes AST)
+    -> Program output
+```
+
+### Component Snapshot
+
+- **Lexer**: Converts source text into tokens (`PRINT`, `ID`, `NUMBER`, `STRING`, etc.)
+- **Parser**: Converts tokens into structured AST nodes
+- **Interpreter**: Evaluates expressions and executes statements
+
+Example AST:
 
 ```text
-.tk program
-    ->
-Lexer
-    ->
-Parser
-    ->
-AST (Abstract Syntax Tree)
-    ->
-Interpreter
-    ->
-Output
-```
-
-### 1) Lexer
-
-Converts source code into tokens.
-
-Input:
-
-```tk
-print("Hello")
-```
-
-Token sequence:
-
-```text
-PRINT LPAREN STRING RPAREN
-```
-
-### 2) Parser
-
-Builds structured syntax trees from tokens.
-
-Input:
-
-```tk
 x = 10
-```
-
-AST:
-
-```text
 ('assign', 'x', ('number', 10))
-```
-
-### 3) Interpreter
-
-Evaluates AST nodes and executes statements.
-
-Input:
-
-```tk
-print(x + y)
-```
-
-Evaluation:
-
-```text
-x + y -> 30
 ```
 
 ## Project Structure
@@ -128,21 +94,15 @@ tklang/
 |
 +-- cli/
 |   +-- tk.py
-|
 +-- lexer/
 |   +-- lexer.py
-|
 +-- parser/
 |   +-- parser.py
-|
 +-- interpreter/
 |   +-- interpreter.py
-|
 +-- runtime/
-|
 +-- examples/
 |   +-- test.tk
-|
 +-- README.md
 ```
 
@@ -159,37 +119,21 @@ Install dependency:
 pip install sly
 ```
 
-Optional virtual environment (Windows):
+(Optional) activate virtual environment on Windows:
 
 ```powershell
 venv\Scripts\activate
 ```
 
-### Run TK Lang
+Run a `.tk` file:
 
 ```bash
 python cli/tk.py examples/test.tk
 ```
 
-Example script (`examples/test.tk`):
-
-```tk
-x = 10
-y = 20
-print(x + y)
-print("TK Lang")
-```
-
-Expected output:
-
-```text
-30
-TK Lang
-```
-
 ## Roadmap
 
-Planned features:
+Planned additions:
 
 - Subtraction, multiplication, division
 - Conditional statements (`if`)
@@ -201,18 +145,37 @@ Planned features:
 - NLP utilities
 - Forecasting tools
 
-Future-style example:
-
-```tk
-data = load("sales.csv")
-model = auto_ml(data)
-forecast(model, 30)
-plot(model)
-```
-
 ## Development Status
 
-TK Lang is currently an **experimental project** focused on language design and building a simplified ML interface.
+TK Lang is currently **experimental** and focused on learning language design while building a simplified ML interface.
+
+## Contributing
+
+Contributions are welcome and appreciated.
+
+1. Fork the repository.
+2. Create a feature branch:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. Make your changes with clear commits.
+4. Add or update examples/tests where relevant.
+5. Push your branch:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+6. Open a Pull Request with:
+   - What changed
+   - Why it was needed
+   - How to test it
+
+### Contribution Ideas
+
+- Add new language operators
+- Improve parser error messages
+- Add test coverage
+- Add ML/EDA built-in commands
+- Improve docs and tutorials
 
 ## License
 
