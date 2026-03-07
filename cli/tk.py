@@ -13,10 +13,9 @@ def run(file):
     parser = TKParser()
     interpreter = TKInterpreter()
 
-    for line in code.splitlines():
-        if line.strip() == "":
-            continue
-        tree = parser.parse(lexer.tokenize(line))
+    tree = parser.parse(lexer.tokenize(code))
+
+    if tree is not None:
         interpreter.execute(tree)
 
 
