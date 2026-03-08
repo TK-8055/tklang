@@ -1,0 +1,2 @@
+data = load("tests/sample.csv")
+print(len(data))

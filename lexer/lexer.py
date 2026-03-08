@@ -5,27 +5,39 @@ class TKLexer(Lexer):
 
     tokens = {
         'PRINT','STRING','NUMBER','ID',
-        'LPAREN','RPAREN',
-        'LBRACE','RBRACE',
+        'LPAREN','RPAREN','COMMA',
+        'LBRACE','RBRACE','LBRACKET','RBRACKET',
         'EQUALS','EQEQ',
         'PLUS','MINUS','TIMES','DIVIDE',
         'GT','LT',
-        'IF' , 'WHILE'
+        'IF','WHILE','FOR','IN','FUNCTION','LEN','LOAD'
     }
 
     ignore = " \t"
+    ignore_comment = r'\#.*'
 
-    PRINT = r'print'
-    IF = r'if'
-    WHILE= r'while'
+    keywords = {
+        "print":"PRINT",
+        "if":"IF",
+        "while":"WHILE",
+        "for":"FOR",
+        "in":"IN",
+        "function":"FUNCTION",
+        "len":"LEN",
+        "load":"LOAD"
+    }
 
-    STRING = r'"[^"]*"'
-    ID = r'[a-zA-Z_][a-zA-Z0-9_]*'
+    STRING = r'"([^"\\]|\\.)*"'
 
     LPAREN = r'\('
     RPAREN = r'\)'
+    COMMA = r','
+
     LBRACE = r'\{'
     RBRACE = r'\}'
+
+    LBRACKET = r'\['
+    RBRACKET = r'\]'
 
     EQEQ = r'=='
     EQUALS = r'='
@@ -38,16 +50,21 @@ class TKLexer(Lexer):
     GT = r'>'
     LT = r'<'
 
-
     @_(r'\d+')
-    def NUMBER(self, t):
-        t.value = int(t.value)
+    def NUMBER(self,t):
+        t.value=int(t.value)
+        return t
+
+    @_(r'[a-zA-Z_][a-zA-Z0-9_]*')
+    def ID(self,t):
+        # Convert identifier to keyword token when it matches reserved words.
+        t.type=self.keywords.get(t.value,"ID")
         return t
 
     @_(r'\n+')
-    def newline(self, t):
-        self.lineno += len(t.value)
+    def newline(self,t):
+        self.lineno+=len(t.value)
 
-    def error(self, t):
-        print("Illegal character:", t.value[0])
-        self.index += 1
+    def error(self,t):
+        # Stop immediately so parser does not run on invalid token stream.
+        raise Exception(f"TK Lexer Error: illegal character '{t.value[0]}'")

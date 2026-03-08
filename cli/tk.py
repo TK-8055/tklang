@@ -7,17 +7,26 @@ from interpreter.interpreter import TKInterpreter
 def run(file):
 
     with open(file) as f:
-        code = f.read()
+        code=f.read()
 
-    lexer = TKLexer()
-    parser = TKParser()
-    interpreter = TKInterpreter()
+    lexer=TKLexer()
+    parser=TKParser()
+    interpreter=TKInterpreter()
 
-    tree = parser.parse(lexer.tokenize(code))
+    tree=parser.parse(lexer.tokenize(code))
 
-    if tree is not None:
-        interpreter.execute(tree)
+    if tree is None:
+        # Guard: do not execute when parsing fails.
+        print("TK Error: parsing failed")
+        return
+
+    interpreter.execute(tree)
 
 
-if __name__ == "__main__":
+if __name__=="__main__":
+
+    if len(sys.argv)<2:
+        print("Usage: tk <file.tk>")
+        sys.exit(1)
+
     run(sys.argv[1])

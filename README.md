@@ -14,12 +14,12 @@
 
 ## What Is TK Lang?
 
-**TK Lang** is a minimal Domain-Specific Language (DSL) built to simplify machine learning workflows and data analysis.
-It removes repetitive Python setup code and gives you a clean, human-readable syntax.
+**TK Lang** is a minimal domain-specific language (DSL) designed to simplify machine learning workflows and data analysis.
+It removes repetitive Python setup code and provides a clean, human-readable syntax.
 
 ## Why It Stands Out
 
-- Fast to read, fast to write
+- Fast to read and fast to write
 - Simple syntax for beginners and rapid prototyping
 - Interpreter architecture that is easy to extend
 - Designed for future ML-first commands
@@ -42,7 +42,7 @@ TK Lang
 
 ## Vision: ML in Plain Language
 
-Future syntax target:
+Future target syntax:
 
 ```tk
 data = load("sales.csv")
@@ -119,7 +119,7 @@ Install dependency:
 pip install sly
 ```
 
-(Optional) activate virtual environment on Windows:
+Optional: activate a virtual environment on Windows:
 
 ```powershell
 venv\Scripts\activate
@@ -135,7 +135,7 @@ python cli/tk.py examples/test.tk
 
 Planned additions:
 
-- Subtraction, multiplication, division
+- Subtraction, multiplication, and division
 - Conditional statements (`if`)
 - Loops
 - Functions
@@ -151,7 +151,7 @@ TK Lang is currently **experimental** and focused on learning language design wh
 
 ## Contributing
 
-Contributions are welcome and appreciated.
+Contributions are welcome.
 
 1. Fork the repository.
 2. Create a feature branch:
@@ -164,7 +164,7 @@ Contributions are welcome and appreciated.
    ```bash
    git push origin feature/your-feature-name
    ```
-6. Open a Pull Request with:
+6. Open a Pull Request and include:
    - What changed
    - Why it was needed
    - How to test it
