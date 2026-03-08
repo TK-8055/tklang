@@ -14,14 +14,16 @@
 
 ## What Is TK Lang?
 
-**TK Lang** is a minimal domain-specific language (DSL) designed to simplify machine learning workflows and data analysis.
+**TK Lang** is a minimal interpreted domain-specific language (DSL) designed to simplify machine learning workflows and data analysis.
 It removes repetitive Python setup code and provides a clean, human-readable syntax.
+
+TK Lang is an experimental DSL project developed with AI-assisted tooling.
 
 ## Why It Stands Out
 
 - Fast to read and fast to write
 - Simple syntax for beginners and rapid prototyping
-- Interpreter architecture that is easy to extend
+- A simple interpreter architecture that is easy to extend
 - Designed for future ML-first commands
 
 ## Quick Example
@@ -38,6 +40,31 @@ Output:
 ```text
 30
 TK Lang
+```
+
+## Example Program
+
+```tk
+nums = [1,2,3]
+
+for n in nums {
+    print(n)
+}
+
+function add(a,b) {
+    print(a+b)
+}
+
+add(5,7)
+```
+
+Output:
+
+```text
+1
+2
+3
+12
 ```
 
 ## Vision: ML in Plain Language
@@ -60,17 +87,28 @@ TK Lang will use Python's ML ecosystem under the hood while keeping a compact DS
 | Variables | Done |
 | Numbers | Done |
 | Strings | Done |
-| Addition (`+`) | Done |
+| Arithmetic (`+`, `-`, `*`, `/`) | Done |
+| Comparisons (`>`, `<`, `==`) | Done |
 | Print statements | Done |
+| `if` statements | Done |
+| `while` loops | Done |
+| Functions | Done |
+| Function parameters and arguments | Done |
+| Lists | Done |
+| `for` loops | Done |
+| `len()` | Done |
+| `load()` file loading | Done |
+| Error messages | Done |
 | Lexer -> Parser -> AST -> Interpreter pipeline | Done |
 
 ## Architecture
 
 ```text
 .tk source file
-    -> Lexer (tokenizes input)
-    -> Parser (builds AST)
-    -> Interpreter (executes AST)
+    -> Lexer
+    -> Parser
+    -> AST
+    -> Interpreter
     -> Program output
 ```
 
@@ -91,19 +129,31 @@ x = 10
 
 ```text
 tklang/
-|
-+-- cli/
-|   +-- tk.py
-+-- lexer/
-|   +-- lexer.py
-+-- parser/
-|   +-- parser.py
-+-- interpreter/
-|   +-- interpreter.py
-+-- runtime/
-+-- examples/
-|   +-- test.tk
-+-- README.md
+│
+├── cli/
+│   └── tk.py
+├── lexer/
+│   └── lexer.py
+├── parser/
+│   └── parser.py
+├── interpreter/
+│   └── interpreter.py
+├── runtime/
+├── tests/
+│   └── run_tests.py
+├── examples/
+│   └── test.tk
+├── README.md
+└── LICENSE
+```
+
+## Quick Install
+
+```bash
+git clone https://github.com/TK-8055/tklang
+cd tklang
+pip install sly
+python cli/tk.py examples/test.tk
 ```
 
 ## Getting Started
@@ -135,19 +185,48 @@ python cli/tk.py examples/test.tk
 
 Planned additions:
 
-- Subtraction, multiplication, and division
-- Conditional statements (`if`)
+- DataFrame-like data operations
+- Built-in EDA commands
+- Automatic ML pipelines
+- Time-series forecasting helpers
+- NLP utilities
+- Visualization commands
+- Plugin system
+
+## Tests
+
+TK Lang includes automated regression tests to verify language features.
+
+Run all tests:
+
+```bash
+python tests/run_tests.py
+```
+
+Current test coverage:
+
+- Arithmetic
+- Comparisons
+- Variables
+- Lists
 - Loops
 - Functions
-- Data loading helpers
-- EDA commands
-- ML automation helpers
-- NLP utilities
-- Forecasting tools
+- File loading
+- Error handling
+
+Example result:
+
+```text
+Summary: 14/14 tests passed
+```
+
+## Version
+
+Current version: v0.1
 
 ## Development Status
 
-TK Lang is currently **experimental** and focused on learning language design while building a simplified ML interface.
+TK Lang is currently **experimental**, actively evolving, and developed with AI-assisted tools.
 
 ## Contributing
 
