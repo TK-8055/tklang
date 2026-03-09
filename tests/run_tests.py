@@ -9,9 +9,16 @@ def run_test(file_path):
     base = file_path.replace(".tk", "")
     expected_file = base + ".expected"
     error_file = base + ".error"
+    stdin_file = base + ".stdin"
+    stdin_data = None
+
+    if os.path.exists(stdin_file):
+        with open(stdin_file, encoding="utf-8") as f:
+            stdin_data = f.read()
 
     result = subprocess.run(
         [sys.executable, "-m", "cli.tk", file_path],
+        input=stdin_data,
         capture_output=True,
         text=True,
     )

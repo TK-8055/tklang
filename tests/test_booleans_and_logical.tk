@@ -1,0 +1,11 @@
+flag = true
+other = false
+
+print(flag and not other)
+print(flag and other)
+print(flag or other)
+print(not other)
+
+if (flag and 10 > 5) {
+    print("ok")
+}

@@ -53,3 +53,19 @@ add(7,8)
 data = load("tests/sample.csv")
 
 print(len(data))
+
+# automatic stdlib
+
+append(nums, 4)
+print(nums)
+
+for i in range(3) {
+    print(i)
+}
+
+user = {
+    "name": "tk",
+    "age": 22
+}
+
+print(keys(user))

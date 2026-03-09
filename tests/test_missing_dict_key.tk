@@ -1,0 +1,5 @@
+user = {
+    "name": "tk"
+}
+
+print(user["age"])

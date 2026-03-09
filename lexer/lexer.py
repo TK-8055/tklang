@@ -1,4 +1,5 @@
 from sly import Lexer
+from runtime.errors import TKLexerError
 
 
 class TKLexer(Lexer):
@@ -7,10 +8,18 @@ class TKLexer(Lexer):
         'PRINT','STRING','NUMBER','ID',
         'LPAREN','RPAREN','COMMA',
         'LBRACE','RBRACE','LBRACKET','RBRACKET',
-        'EQUALS','EQEQ',
+        'EQUALS','EQEQ','NEQ',
         'PLUS','MINUS','TIMES','DIVIDE',
-        'GT','LT',
-        'IF','WHILE','FOR','IN','FUNCTION','LEN','LOAD'
+        'GT','LT','GTE','LTE',
+        'IF','ELSE','WHILE','FOR','IN','FUNCTION',
+        'LEN','LOAD',
+        'INPUT',
+        'AND','OR','NOT',
+        'RETURN',
+        'BREAK','CONTINUE',
+        'TRUE','FALSE',
+        'COLON',
+        'BANG'
     }
 
     ignore = " \t"
@@ -19,12 +28,22 @@ class TKLexer(Lexer):
     keywords = {
         "print":"PRINT",
         "if":"IF",
+        "else":"ELSE",
         "while":"WHILE",
         "for":"FOR",
         "in":"IN",
         "function":"FUNCTION",
         "len":"LEN",
-        "load":"LOAD"
+        "load":"LOAD",
+        "input":"INPUT",
+        "and":"AND",
+        "or":"OR",
+        "not":"NOT",
+        "return":"RETURN",
+        "break":"BREAK",
+        "continue":"CONTINUE",
+        "true":"TRUE",
+        "false":"FALSE"
     }
 
     STRING = r'"([^"\\]|\\.)*"'
@@ -32,6 +51,7 @@ class TKLexer(Lexer):
     LPAREN = r'\('
     RPAREN = r'\)'
     COMMA = r','
+    COLON = r':'
 
     LBRACE = r'\{'
     RBRACE = r'\}'
@@ -40,13 +60,17 @@ class TKLexer(Lexer):
     RBRACKET = r'\]'
 
     EQEQ = r'=='
+    NEQ = r'!='
     EQUALS = r'='
+    BANG = r'!'
 
     PLUS = r'\+'
     MINUS = r'-'
     TIMES = r'\*'
     DIVIDE = r'/'
 
+    GTE = r'>='
+    LTE = r'<='
     GT = r'>'
     LT = r'<'
 
@@ -67,4 +91,4 @@ class TKLexer(Lexer):
 
     def error(self,t):
         # Stop immediately so parser does not run on invalid token stream.
-        raise Exception(f"TK Lexer Error: illegal character '{t.value[0]}'")
+        raise TKLexerError(f"TK Lexer Error: illegal character '{t.value[0]}'")

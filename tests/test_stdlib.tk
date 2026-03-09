@@ -1,0 +1,26 @@
+nums = [1, 2]
+append(nums, 3)
+print(nums)
+
+for i in range(3) {
+    print(i)
+}
+
+user = {
+    "name": "tk",
+    "age": 22
+}
+
+print(keys(user))
+print(values(user))
+
+sort(nums)
+print(nums)
+print(pop(nums))
+print(sum(nums))
+print(min(nums))
+print(max(nums))
+print(type(1))
+print(type("x"))
+print(str(123))
+print(int("123"))

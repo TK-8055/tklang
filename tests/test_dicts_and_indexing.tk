@@ -1,0 +1,10 @@
+nums = [10, 20, 30]
+print(nums[0])
+
+user = {
+    "name": "tk",
+    "age": 22
+}
+
+print(user["name"])
+print(user["age"])

@@ -1,0 +1,11 @@
+if (true) {
+    print("ok")
+} else {
+    print("bad")
+}
+
+if (false) {
+    print("bad")
+} else {
+    print("else")
+}

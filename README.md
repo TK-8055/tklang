@@ -1,261 +1,149 @@
-﻿# TK Lang
+﻿# TKLang
 
-<p align="center">
-  <strong>A tiny language for big ML ideas.</strong><br/>
-  Write less boilerplate. Run more experiments.
-</p>
+TKLang is a small interpreted scripting language built for learning
+language design and building DSLs.
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white" alt="Python 3.11+" />
-  <img src="https://img.shields.io/badge/Status-Experimental-orange" alt="Experimental" />
-  <img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License" />
-  <img src="https://img.shields.io/badge/Built%20with-SLY-blue" alt="Built with SLY" />
-</p>
+It includes a full interpreter pipeline:
+lexer -> parser -> AST -> interpreter -> runtime.
 
-## What Is TK Lang?
+## Features
 
-**TK Lang** is a minimal interpreted domain-specific language (DSL) designed to simplify machine learning workflows and data analysis.
-It removes repetitive Python setup code and provides a clean, human-readable syntax.
+- Variables, numbers, strings, booleans
+- Arithmetic: `+`, `-`, `*`, `/`
+- Comparisons: `>`, `<`, `==`, `!=`, `>=`, `<=`
+- Logical operators: `and`, `or`, `not`
+- Control flow: `if`, `if/else`, `while`, `for`, `break`, `continue`
+- Collections: lists, dictionaries, indexing
+- Functions: standard `function name(...) {}` and short `name!(...) {}`
+- `return` with proper function return propagation
+- Built-ins:
+  - Core: `print(...)`, `len(...)`, `input()`, `load("file.csv")`
+  - Auto-loaded stdlib: `append`, `range`, `keys`, `values`, `pop`, `sort`, `sum`, `min`, `max`, `type`, `str`, `int`
+- Comments: `# ...`
+- Typed error classes and CLI error handling
+- File path safety for CLI source files and `load(...)` paths
 
-TK Lang is an experimental DSL project developed with AI-assisted tooling.
+## Full Syntax
 
-## Why It Stands Out
-
-- Fast to read and fast to write
-- Simple syntax for beginners and rapid prototyping
-- A simple interpreter architecture that is easy to extend
-- Designed for future ML-first commands
+See [SYNTAX.md](./SYNTAX.md) for complete grammar and examples.
 
 ## Quick Example
 
 ```tk
 x = 10
-y = 20
+y = 5
 print(x + y)
-print("TK Lang")
-```
 
-Output:
-
-```text
-30
-TK Lang
-```
-
-## Example Program
-
-```tk
-nums = [1,2,3]
+nums = [1, 2, 3]
+append(nums, 4)
 
 for n in nums {
     print(n)
 }
 
-function add(a,b) {
-    print(a+b)
+add!(a, b) {
+    return a + b
 }
 
-add(5,7)
+print(add(7, 8))
 ```
 
-Output:
+Example output:
 
 ```text
+15
 1
 2
 3
-12
+4
 ```
 
-## Vision: ML in Plain Language
+## Installation
 
-Future target syntax:
-
-```tk
-data = load("sales.csv")
-model = linear_regression(data)
-forecast(model, 30)
-plot(model)
+```bash
+git clone https://github.com/<your-username>/tklang
+cd tklang
+pip install sly
 ```
 
-TK Lang will use Python's ML ecosystem under the hood while keeping a compact DSL interface.
+## Run
 
-## Current Features
-
-| Feature | Status |
-|---|---|
-| Variables | Done |
-| Numbers | Done |
-| Strings | Done |
-| Arithmetic (`+`, `-`, `*`, `/`) | Done |
-| Comparisons (`>`, `<`, `==`) | Done |
-| Print statements | Done |
-| `if` statements | Done |
-| `while` loops | Done |
-| Functions | Done |
-| Function parameters and arguments | Done |
-| Lists | Done |
-| `for` loops | Done |
-| `len()` | Done |
-| `load()` file loading | Done |
-| Error messages | Done |
-| Lexer -> Parser -> AST -> Interpreter pipeline | Done |
-
-## Architecture
-
-```text
-.tk source file
-    -> Lexer
-    -> Parser
-    -> AST
-    -> Interpreter
-    -> Program output
+```bash
+python -m cli.tk examples/test.tk
 ```
 
-### Component Snapshot
+If you set up a shell alias/entry point:
 
-- **Lexer**: Converts source text into tokens (`PRINT`, `ID`, `NUMBER`, `STRING`, etc.)
-- **Parser**: Converts tokens into structured AST nodes
-- **Interpreter**: Evaluates expressions and executes statements
+```bash
+tk examples/test.tk
+```
 
-Example AST:
+## Tests
 
-```text
-x = 10
-('assign', 'x', ('number', 10))
+Run full test suite:
+
+```bash
+python tests/run_tests.py
 ```
 
 ## Project Structure
 
 ```text
 tklang/
-│
-├── cli/
-│   └── tk.py
-├── lexer/
-│   └── lexer.py
-├── parser/
-│   └── parser.py
-├── interpreter/
-│   └── interpreter.py
-├── runtime/
-├── tests/
-│   └── run_tests.py
-├── examples/
-│   └── test.tk
-├── README.md
-└── LICENSE
+|-- cli/
+|   `-- tk.py
+|-- lexer/
+|   `-- lexer.py
+|-- parser/
+|   `-- parser.py
+|-- interpreter/
+|   `-- interpreter.py
+|-- runtime/
+|   |-- errors.py
+|   `-- io.py
+|-- tests/
+|   `-- run_tests.py
+|-- examples/
+|   `-- test.tk
+|-- SYNTAX.md
+`-- README.md
 ```
 
-## Quick Install
-
-```bash
-git clone https://github.com/TK-8055/tklang
-cd tklang
-pip install sly
-python cli/tk.py examples/test.tk
-```
-
-## Getting Started
-
-### Requirements
-
-- Python 3.11+
-- `sly`
-
-Install dependency:
-
-```bash
-pip install sly
-```
-
-Optional: activate a virtual environment on Windows:
-
-```powershell
-venv\Scripts\activate
-```
-
-Run a `.tk` file:
-
-```bash
-python cli/tk.py examples/test.tk
-```
-
-## Roadmap
-
-Planned additions:
-
-- DataFrame-like data operations
-- Built-in EDA commands
-- Automatic ML pipelines
-- Time-series forecasting helpers
-- NLP utilities
-- Visualization commands
-- Plugin system
-
-## Tests
-
-TK Lang includes automated regression tests to verify language features.
-
-Run all tests:
-
-```bash
-python tests/run_tests.py
-```
-
-Current test coverage:
-
-- Arithmetic
-- Comparisons
-- Variables
-- Lists
-- Loops
-- Functions
-- File loading
-- Error handling
-
-Example result:
+## Architecture
 
 ```text
-Summary: 14/14 tests passed
+TKLang Program
+      |
+      v
+    Lexer
+      |
+      v
+    Parser
+      |
+      v
+      AST
+      |
+      v
+ Interpreter
+      |
+      v
+   Runtime
 ```
+
+## Goals
+
+- Simple scripting language for practical local scripting
+- Educational interpreter architecture
+- Platform for future ML-oriented DSL features
 
 ## Version
 
-Current version: v0.1
+Current version: `v1.0`
 
-## Development Status
+## Status
 
-TK Lang is currently **experimental**, actively evolving, and developed with AI-assisted tools.
-
-## Contributing
-
-Contributions are welcome.
-
-1. Fork the repository.
-2. Create a feature branch:
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-3. Make your changes with clear commits.
-4. Add or update examples/tests where relevant.
-5. Push your branch:
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-6. Open a Pull Request and include:
-   - What changed
-   - Why it was needed
-   - How to test it
-
-### Contribution Ideas
-
-- Add new language operators
-- Improve parser error messages
-- Add test coverage
-- Add ML/EDA built-in commands
-- Improve docs and tutorials
+TKLang is stable for local scripting and educational language development.
 
 ## License
 
-MIT License
+MIT

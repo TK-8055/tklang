@@ -1,0 +1,5 @@
+nums = []
+print(len(nums))
+
+d = {}
+print(len(d))

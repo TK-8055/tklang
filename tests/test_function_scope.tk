@@ -1,0 +1,6 @@
+function test() {
+    x = 5
+}
+
+test()
+print(x)
