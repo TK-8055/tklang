@@ -256,6 +256,12 @@ Contributions are welcome.
 - Add ML/EDA built-in commands
 - Improve docs and tutorials
 
+## 💡 Ideas & Discussions
+
+[![Share Ideas](https://img.shields.io/badge/💡-Share%20Ideas-yellow)](https://github.com/<your-username>/tklang/discussions)
+
+Have an idea for new syntax or features? Join the discussion!
+
 ## License
 
 MIT License
